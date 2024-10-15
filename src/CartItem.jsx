@@ -28,12 +28,17 @@ const CartItem = ({ onContinueShopping }) => {
 
 
   const handleIncrement = (item) => {
+    // last update (2 rows)
+    const incrementItem = cart.items.find((e) => e.name === item.name);
+    item.quantity++;
     dispatch(updateQuantity(item));
   };
 
   const handleDecrement = (item) => {
-    const decrementItem = cart.filter((e) => e.name === item.name);
-    if(decrementItem.quantity > 0) {
+    // last update (3 rows)
+    const decrementItem = cart.items.find((e) => e.name === item.name);
+    if(item.quantity > 0) {
+        item.quantity--;
         dispatch(updateQuantity(item));
     }
   };

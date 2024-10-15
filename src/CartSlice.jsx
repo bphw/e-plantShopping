@@ -9,9 +9,11 @@ export const CartSlice = createSlice({
     addItem: (state, action) => {
         const {name,image,cost} = action.payload;
         const existingItem = state.items.find(item => item.name === name);
-        console.log(existingItem);
         if(existingItem) {
             existingItem.quantity++;
+            // last update (2 rows)
+            state.items = state.items.filter(item => item.name !== name);
+            state.items.push(existingItem);
         } else {
             state.items.push({name,image,cost,quantity:1});
         }
