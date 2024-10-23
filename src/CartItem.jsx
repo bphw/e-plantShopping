@@ -19,24 +19,34 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   const handleContinueShopping = (e) => {
-   
+   e.preventDefault();
+   return onContinueShopping();
   };
-  // Task 3.2
+
   const handleCheckoutShopping = (e) => {
     alert('Functionality to be added for future reference');
   };
 
 
   const handleIncrement = (item) => {
-    // last update (2 rows)
-    const incrementItem = cart.items.find((e) => e.name === item.name);
-    item.quantity++;
-    dispatch(updateQuantity(item));
+    let lookupItem = cart.find((e) => e.name === item.name);
+    // add as new non-read-only object; 
+    // without this item or lookupItem remains read-only
+    // make it unable to update into updateQuantity
+    const incrementedItem = {
+        name: lookupItem.name,
+        image: lookupItem.image,
+        description: lookupItem.description,
+        cost: lookupItem.cost,
+        quantity: lookupItem.quantity + 1
+    };
+    
+    dispatch(updateQuantity(incrementedItem));
   };
 
   const handleDecrement = (item) => {
     // last update (3 rows)
-    const decrementItem = cart.items.find((e) => e.name === item.name);
+    const decrementItem = cart.find((e) => e.name === item.name);
     if(item.quantity > 0) {
         item.quantity--;
         dispatch(updateQuantity(item));

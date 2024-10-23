@@ -246,7 +246,7 @@ const handlePlantsClick = (e) => {
 };
 
    const handleContinueShopping = (e) => {
-    e.preventDefault();
+    // e.preventDefault(); // Commented as this make apps not working
     setShowCart(false);
   };
   const handleAddToCart = (product) => {

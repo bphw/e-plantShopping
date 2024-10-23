@@ -11,7 +11,7 @@ export const CartSlice = createSlice({
         const existingItem = state.items.find(item => item.name === name);
         if(existingItem) {
             existingItem.quantity++;
-            // last update (2 rows)
+
             state.items = state.items.filter(item => item.name !== name);
             state.items.push(existingItem);
         } else {
@@ -27,7 +27,9 @@ export const CartSlice = createSlice({
         if (itemToUpdate) {
             itemToUpdate.quantity = quantity;
         }
-    
+        // this 2 rows below still need to review, increment quantity still adding new same product
+        state.items = state.items.filter((item => item.name !== action.payload));
+        state.items.push(itemToUpdate);
     },
   },
 });
