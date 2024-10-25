@@ -19,6 +19,8 @@ export const CartSlice = createSlice({
         }
     },
     removeItem: (state, action) => {
+        // removeItem not working yet
+        console.log("removeItem called");
         state.items = state.items.filter((item => item.name !== action.payload));
     },
     updateQuantity: (state, action) => {
@@ -27,9 +29,6 @@ export const CartSlice = createSlice({
         if (itemToUpdate) {
             itemToUpdate.quantity = quantity;
         }
-        // this 2 rows below still need to review, increment quantity still adding new same product
-        state.items = state.items.filter((item => item.name !== action.payload));
-        state.items.push(itemToUpdate);
     },
   },
 });

@@ -46,10 +46,17 @@ const CartItem = ({ onContinueShopping }) => {
 
   const handleDecrement = (item) => {
     // last update (3 rows)
-    const decrementItem = cart.find((e) => e.name === item.name);
+    const lookupItem = cart.find((e) => e.name === item.name);
     if(item.quantity > 0) {
-        item.quantity--;
-        dispatch(updateQuantity(item));
+        const decrementedItem = {
+            name: lookupItem.name,
+            image: lookupItem.image,
+            description: lookupItem.description,
+            cost: lookupItem.cost,
+            quantity: lookupItem.quantity - 1
+        };
+        
+        dispatch(updateQuantity(decrementedItem));
     }
   };
 
@@ -61,7 +68,7 @@ const CartItem = ({ onContinueShopping }) => {
   const calculateTotalCost = (item) => {
     let numeric_cost = item.cost.replace(/\$/g,'');
     let total = (numeric_cost * item.quantity);
-    console.log('calculateTotalCost=' + total);
+
     return total;
   };
 
@@ -90,7 +97,7 @@ const CartItem = ({ onContinueShopping }) => {
       <div className="continue_shopping_btn">
         <button className="get-started-button" onClick={(e) => handleContinueShopping(e)}>Continue Shopping</button>
         <br />
-        <button className="get-started-button1">Checkout</button>
+        <button className="get-started-button1" onClick={(e) => handleCheckoutShopping(e)}>Checkout</button>
       </div>
     </div>
   );
