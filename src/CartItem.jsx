@@ -45,7 +45,6 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   const handleDecrement = (item) => {
-    // last update (3 rows)
     const lookupItem = cart.find((e) => e.name === item.name);
     if(item.quantity > 0) {
         const decrementedItem = {
